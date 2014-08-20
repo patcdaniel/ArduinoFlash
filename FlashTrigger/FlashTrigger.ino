@@ -16,11 +16,13 @@ analogIn line is pulled near 1023.
 */
 
 int triggerOut = 13;
+int cameraTrigger = 12;
 int resistorIn = 0;
 int threshold = 800;
 
 void setup() {
   pinMode(triggerOut, OUTPUT);
+  pinMode(cameraTrigger, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -28,12 +30,13 @@ void loop() {
   Serial.println(analogRead(resistorIn));
   if(analogRead(resistorIn) > threshold) {
     digitalWrite(triggerOut, HIGH);
+    digitalWrite(cameraTrigger, HIGH);
     Serial.println("high");
-    delay(500);
+    delay(1000);
     digitalWrite(triggerOut,LOW);
+    digitalWrite(cameraTrigger, LOW);
   }
   else {
-    digitalWrite(triggerOut, LOW);
     Serial.println("low");
   }
 }
